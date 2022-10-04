@@ -11,6 +11,14 @@ const path = require('path');
     console.error(`Erro ao ler o arquivo: ${error}`);
   }
 }
+// Função requisito 3
+const crypto = require('crypto');
+
+function generateToken() {
+  return crypto.randomBytes(8).toString('hex');
+}
+
 module.exports = {
   talker,
+  generateToken,
 };
