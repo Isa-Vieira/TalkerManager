@@ -57,7 +57,7 @@ const { valitedName } = require('./middlewars.js/valitedName');
 const { valitedAge } = require('./middlewars.js/valitedAge');
 const { valitedTalk } = require('./middlewars.js/valitedTalk');
 const { valitedRate } = require('./middlewars.js/valitedRate');
-const { stringify } = require('querystring');
+/* const { stringify } = require('querystring'); */
 
 app.post('/talker', 
 auth,
