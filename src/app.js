@@ -1,6 +1,8 @@
 // Requisito Rota 1
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+const fs = require('fs').promises;
 const { talker, generateToken, writeTalker } = require('./utils.js/fsUtils');
 
 const app = express();
@@ -55,6 +57,7 @@ const { valitedName } = require('./middlewars.js/valitedName');
 const { valitedAge } = require('./middlewars.js/valitedAge');
 const { valitedTalk } = require('./middlewars.js/valitedTalk');
 const { valitedRate } = require('./middlewars.js/valitedRate');
+const { stringify } = require('querystring');
 
 app.post('/talker', 
 auth,
@@ -70,4 +73,21 @@ await writeTalker(dadosName);
 return res.status(201).json(dadosName);
 });
 
+// Requisito 6
+/* app.put('/talker/:id', async (req, res) => {
+const { id } = req.params;
+const bancoAtual = req.body;
+const recebebanco = await talker();
+let updateInfo;
+
+}) */
+// Requisito 7
+app.delete('/talker/:id/', auth, async (req, res) => {
+const { id } = req.params;
+const pessoas = await talker();
+const arrayPosition = await pessoas.findIndex((elem) => elem.id === Number(id));
+pessoas.splice(arrayPosition, 1);
+ await fs.writeFile(path.resolve(__dirname, './talker.json'), JSON.stringify(pessoas)); 
+ return res.status(204).end();
+});
 module.exports = app;
